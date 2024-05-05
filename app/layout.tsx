@@ -5,11 +5,16 @@ import "./globals.css";
 import AuthProvider from "@/providers/AuthProvider";
 import { Toaster } from "@/components/ui/toaster";
 
+import "@stream-io/video-react-sdk/dist/css/styles.css";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Zloom",
   description: "Video Conferencing App",
+  icons: {
+    icon: "/icons/logo.svg",
+  },
 };
 
 export default function RootLayout({
