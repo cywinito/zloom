@@ -81,6 +81,19 @@
   color: white;
 }
 
+.cl-userButtonPopoverActionButton:hover,
+.cl-userButtonPopoverActionButton:hover .cl-userButtonPopoverActionButtonIcon {
+  @apply text-blue-1;
+}
+
+.cl-navbarButton:not(.cl-active) {
+  @apply text-slate-200;
+}
+
+.cl-badge {
+  @apply bg-blue-1 text-white;
+}
+
 /* =============================== */
 
 @layer utilities {
