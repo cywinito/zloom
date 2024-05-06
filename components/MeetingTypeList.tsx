@@ -8,6 +8,7 @@ import ReactDatePicker from "react-datepicker";
 
 import HomeCard from "./HomeCard";
 import MeetingModal from "./MeetingModal";
+import Loader from "./Loader";
 import { useToast } from "@/components/ui/use-toast";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -21,7 +22,7 @@ const MeetingTypeList = () => {
     description: "",
     link: "",
   });
-  const [callDetails, setCallDetails] = useState<Call>();
+  const [callDetail, setCallDetail] = useState<Call>();
   const { user } = useUser();
   const client = useStreamVideoClient();
   const { toast } = useToast();
@@ -52,7 +53,7 @@ const MeetingTypeList = () => {
           },
         },
       });
-      setCallDetails(call);
+      setCallDetail(call);
 
       if (!values.description) {
         router.push(`/meeting/${call.id}`);
@@ -68,7 +69,8 @@ const MeetingTypeList = () => {
     }
   };
 
-  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/join/${callDetails?.id}`;
+  if (!client || !user) return <Loader />;
+  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetail?.id}`;
 
   return (
     <section className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -79,6 +81,14 @@ const MeetingTypeList = () => {
         description="Start an instant meeting"
         handleClick={() => setMeetingState("isInstantMeeting")}
         className="bg-orange-1"
+      />
+      <HomeCard
+        img="/icons/join-meeting.svg"
+        imgAlt="join meeting icon"
+        title="Join Meeting"
+        description="Via invitation link"
+        className="bg-yellow-1"
+        handleClick={() => setMeetingState("isJoiningMeeting")}
       />
       <HomeCard
         img="/icons/schedule.svg"
@@ -96,15 +106,8 @@ const MeetingTypeList = () => {
         handleClick={() => router.push("/recordings")}
         className="bg-purple-1"
       />
-      <HomeCard
-        img="/icons/join-meeting.svg"
-        imgAlt="join meeting icon"
-        title="Join Meeting"
-        description="Via invitation link"
-        className="bg-yellow-1"
-        handleClick={() => setMeetingState("isJoiningMeeting")}
-      />
-      {!callDetails ? (
+
+      {!callDetail ? (
         <MeetingModal
           isOpen={meetingState === "isScheduleMeeting"}
           onClose={() => setMeetingState(undefined)}
