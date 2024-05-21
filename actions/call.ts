@@ -14,7 +14,7 @@ export const getFirstUpcomingCall = async () => {
     sort: [{ field: "starts_at", direction: -1 }],
     filter_conditions: {
       starts_at: {
-        $exists: true,
+        $gt: new Date().toISOString(),
       },
       $or: [
         {
