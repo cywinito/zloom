@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { type Call, type CallRecording } from "@stream-io/video-react-sdk";
 
 import { useGetCalls } from "@/hooks/useGetCalls";
-import MeetingCard from "./MeetingCard";
+import MeetingCard, { MeetingCardSkeleton } from "./MeetingCard";
 import Loader from "./Loader";
 import { toast } from "./ui/use-toast";
 
@@ -64,7 +64,14 @@ const CallList = ({ type }: { type: "ended" | "upcoming" | "recordings" }) => {
   const calls = getCalls();
   const noCallsMessage = getNoCallsMessage();
 
-  if (isLoading) return <Loader />;
+  if (isLoading)
+    return (
+      <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">
+        {[...Array(4)].map((_, index) => (
+          <MeetingCardSkeleton key={index} />
+        ))}
+      </div>
+    );
 
   return (
     <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">

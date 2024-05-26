@@ -3,9 +3,10 @@
 import Image from "next/image";
 
 import { cn } from "@/lib/utils";
-import { Button } from "./ui/button";
 import { avatarImages } from "@/constants";
-import { useToast } from "./ui/use-toast";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface MeetingCardProps {
   title: string;
@@ -41,7 +42,7 @@ const MeetingCard = ({
           </div>
         </div>
       </article>
-      <article className={cn("flex justify-center relative", {})}>
+      <article className="flex justify-center relative">
         <div className="relative flex w-full max-sm:hidden">
           {avatarImages.map((img, index) => (
             <Image
@@ -91,3 +92,32 @@ const MeetingCard = ({
 };
 
 export default MeetingCard;
+
+export const MeetingCardSkeleton = () => {
+  return (
+    <section className="flex min-h-[258px] w-full flex-col justify-between rounded-[14px] bg-dark-1 px-5 py-8 xl:max-w-[568px]">
+      <article className="flex flex-col gap-5">
+        <Skeleton className="w-7 h-7 bg-gray-500" />
+        <div className="flex justify-between">
+          <div className="flex flex-col gap-2">
+            <Skeleton className="w-32 h-7 bg-gray-500" />
+            <Skeleton className="w-40 h-7 bg-gray-500" />
+          </div>
+        </div>
+      </article>
+      <article className="flex justify-center relative">
+        <div className="relative flex w-full max-sm:hidden">
+          {[...Array(5)].map((_, i) => (
+            <Skeleton
+              key={i}
+              className={cn("rounded-full w-10 h-10 bg-gray-500", {
+                absolute: i > 0,
+              })}
+              style={{ top: 0, left: i * 28 }}
+            />
+          ))}
+        </div>
+      </article>
+    </section>
+  );
+};

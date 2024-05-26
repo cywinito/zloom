@@ -4,8 +4,8 @@ import { ReactNode, useEffect, useState } from "react";
 import { StreamVideo, StreamVideoClient } from "@stream-io/video-react-sdk";
 import { useUser } from "@clerk/nextjs";
 
-import Loader from "@/components/Loader";
 import { tokenProvider } from "@/actions/stream";
+import LoadingSkeleton from "@/app/(root)/(home)/loading";
 
 const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY;
 
@@ -29,7 +29,7 @@ const StreamClientProvider = ({ children }: { children: ReactNode }) => {
     setVideoClient(client);
   }, [isLoaded, user]);
 
-  if (!videoClient) return <Loader />;
+  if (!videoClient) return <LoadingSkeleton />;
 
   return <StreamVideo client={videoClient}>{children}</StreamVideo>;
 };
