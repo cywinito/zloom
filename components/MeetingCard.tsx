@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import { avatarImages } from "@/constants";
@@ -15,7 +16,6 @@ interface MeetingCardProps {
   isPreviousMeeting?: boolean;
   buttonIcon1?: string;
   buttonText?: string;
-  handleClick: () => void;
   link: string;
 }
 
@@ -25,7 +25,6 @@ const MeetingCard = ({
   date,
   isPreviousMeeting,
   buttonIcon1,
-  handleClick,
   link,
   buttonText,
 }: MeetingCardProps) => {
@@ -61,12 +60,15 @@ const MeetingCard = ({
         </div>
         {!isPreviousMeeting && (
           <div className="flex gap-2">
-            <Button onClick={handleClick} className="rounded bg-blue-1 px-6">
+            <Link
+              href={link}
+              className="flex gap-2 items-center justify-center rounded bg-blue-1 px-6"
+            >
               {buttonIcon1 && (
                 <Image src={buttonIcon1} alt="feature" width={20} height={20} />
               )}
-              &nbsp; {buttonText}
-            </Button>
+              {buttonText}
+            </Link>
             <Button
               onClick={() => {
                 navigator.clipboard.writeText(link);

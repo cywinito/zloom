@@ -1,7 +1,8 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import Image from "next/image";
+
+import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface HomeCardProps {
@@ -30,7 +31,7 @@ const HomeCard = ({
       onClick={handleClick}
     >
       <div className="flex-center glassmorphism size-12 rounded-[10px]">
-        <Image src={img} alt={imgAlt} width={27} height={27} />
+        <Image src={img} alt={imgAlt} width={27} height={27} loading="eager" />
       </div>
       <div className="flex flex-col gap-2">
         <h1 className="text-2xl font-bold">{title}</h1>

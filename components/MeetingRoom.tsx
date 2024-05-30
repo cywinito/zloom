@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { LayoutList, Users } from "lucide-react";
 import {
   CallControls,
   CallParticipantsList,
@@ -19,8 +21,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LayoutList, Users } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
+
 import EndCallButton from "./EndCallButton";
 import Loader from "./Loader";
 
