@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import { sidebarLinks } from "@/constants";
 import { cn } from "@/lib/utils";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -42,3 +43,19 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
+export const SidebarSkeleton = () => {
+  return (
+    <section className="sticky left-0 top-0 flex h-screen w-fit flex-col gap-6 bg-dark-1 p-6 pt-28 text-white max-sm:hidden lg:w-[264px]">
+      {[...Array(5)].map((_, i) => (
+        <div
+          key={i}
+          className="flex gap-1 p-4 items-center rounded-lg justify-start"
+        >
+          <Skeleton className="w-[24px] h-[24px] bg-gray-500" />
+          <Skeleton className="w-32 h-7 bg-gray-500 max-lg:hidden" />
+        </div>
+      ))}
+    </section>
+  );
+};
