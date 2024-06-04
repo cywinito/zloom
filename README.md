@@ -1,4 +1,4 @@
-# Zloom
+# ![zloom logo](https://github.com/cywinito/zloom/blob/main/public/icons/zloom-logo.svg)
 
 Welcome to Zloom, your go-to solution for seamless online meetings and collaboration! Zloom is a modern, feature-rich platform built with [Next.js](https://nextjs.org/), providing users with high-quality video conferencing capabilities.
 
